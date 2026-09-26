@@ -288,182 +288,326 @@ setPaymentError("");
     );
 }
 
-    return (
-       <div
-    className="tip-page"
-    style={{
-        background:
-            branding.backgroundColor
-    }}
->
+   return (
+    <div className="tip-page">
 
-            <div
-    className="tip-card"
-    style={{
-        background:
-            branding.cardColor
-    }}
->
+        <main className="tip-container">
 
-                <div className="streamer-header">
+            {/* CREATOR */}
+            <section className="creator-section">
 
-                    {streamer.profileImage ? (
-                        <img
-                            src={streamer.profileImage}
-                            alt={streamer.displayName}
-                            className="profile-image"
+                {streamer.profileImage ? (
+                    <img
+                        src={streamer.profileImage}
+                        alt={streamer.displayName}
+                        className="profile-image"
+                    />
+                ) : (
+                    <div className="profile-placeholder">
+                        {streamer.displayName
+                            ?.charAt(0)
+                            .toUpperCase()}
+                    </div>
+                )}
+
+                <h1 className="creator-name">
+                    {streamer.displayName}
+                </h1>
+
+                <p className="streamer-username">
+                    @{streamer.username}
+                </p>
+
+                {streamer.bio && (
+                    <p className="streamer-bio">
+                        {streamer.bio}
+                    </p>
+                )}
+
+            </section>
+
+
+            {/* TIP CARD */}
+            <section className="tip-card">
+
+                <div className="tip-card-header">
+                    <h2>
+                        Send a tip
+                    </h2>
+
+                    <p>
+                        Show your support with a tip
+                        and a message.
+                    </p>
+                </div>
+
+
+                <form
+                    onSubmit={handleSubmit}
+                    className="tip-form"
+                >
+
+                    {/* AMOUNT */}
+                    <div className="form-group amount-section">
+
+                        <div className="field-heading">
+                            <label>
+                                Tip amount
+                            </label>
+
+                           
+                        </div>
+
+
+                        {/* Keep this block if you still have
+                            streamer preset amounts */}
+                        {streamer.tipAmounts &&
+                            streamer.tipAmounts.length > 0 && (
+
+                            <div className="preset-amounts">
+
+                                {streamer.tipAmounts.map(
+                                    (presetAmount) => (
+
+                                    <button
+                                        key={presetAmount}
+                                        type="button"
+                                        className={
+                                            Number(amount) ===
+                                            presetAmount
+                                                ? "preset-button active"
+                                                : "preset-button"
+                                        }
+                                        onClick={() =>
+                                            setAmount(
+                                                String(
+                                                    presetAmount
+                                                )
+                                            )
+                                        }
+                                    >
+                                        {currency}{" "}
+                                        {presetAmount}
+                                    </button>
+
+                                ))}
+
+                            </div>
+
+                        )}
+
+
+                        <div className="amount-currency-row">
+
+                            <div className="amount-input-wrapper">
+
+                                <span className="amount-label">
+                                    Amount
+                                </span>
+
+                                <input
+                                    type="number"
+                                    min="1"
+                                    placeholder="200"
+                                    value={amount}
+                                    onChange={(e) =>
+                                        setAmount(
+                                            e.target.value
+                                        )
+                                    }
+                                />
+
+                            </div>
+
+
+                            <div className="currency-wrapper">
+
+                                <span className="amount-label">
+                                    Currency
+                                </span>
+
+                                <select
+                                    value={currency}
+                                    onChange={(e) =>
+                                        setCurrency(
+                                            e.target.value
+                                        )
+                                    }
+                                >
+                                    <option value="INR">
+                                        INR
+                                    </option>
+
+                                    <option value="USD">
+                                        USD
+                                    </option>
+
+                                    <option value="EUR">
+                                        EUR
+                                    </option>
+
+                                    <option value="GBP">
+                                        GBP
+                                    </option>
+
+                                    <option value="CHF">
+                                        CHF
+                                    </option>
+
+                                    <option value="SGD">
+                                        SGD
+                                    </option>
+
+                                    <option value="CAD">
+                                        CAD
+                                    </option>
+
+                                    <option value="AUD">
+                                        AUD
+                                    </option>
+                                </select>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    {/* NAME */}
+                    <div className="form-group">
+
+                        <label>
+                            Your name
+                        </label>
+
+                        <input
+                            type="text"
+                            placeholder="Enter your name"
+                            value={name}
+                            onChange={(e) =>
+                                setName(e.target.value)
+                            }
                         />
-                    ) : (
-                        <div className="profile-placeholder">
-                            {streamer.displayName
-                                ?.charAt(0)
-                                .toUpperCase()}
+
+                    </div>
+
+
+                    {/* EMAIL */}
+                    <div className="form-group">
+
+                        <div className="field-heading">
+                            <label>
+                                Email
+                            </label>
+
+                            <span>
+                                Payment receipt
+                            </span>
+                        </div>
+
+                        <input
+                            type="email"
+                            placeholder="you@example.com"
+                            value={email}
+                            onChange={(e) =>
+                                setEmail(e.target.value)
+                            }
+                        />
+
+                    </div>
+
+
+                    {/* MESSAGE */}
+                    <div className="form-group">
+
+                        <div className="field-heading">
+
+                            <label>
+                                Message
+                            </label>
+
+                            <span>
+                                {message.length}/200
+                            </span>
+
+                        </div>
+
+                        <textarea
+                            placeholder={`Write a message for ${streamer.displayName}...`}
+                            maxLength="200"
+                            value={message}
+                            onChange={(e) =>
+                                setMessage(
+                                    e.target.value
+                                )
+                            }
+                        />
+
+                    </div>
+
+
+                    {/* TERMS */}
+                    <label className="terms-box">
+
+                        <input
+                            type="checkbox"
+                            checked={termsAccepted}
+                            onChange={(e) =>
+                                setTermsAccepted(
+                                    e.target.checked
+                                )
+                            }
+                        />
+
+                        <span>
+                            I acknowledge that this is a
+                            non-refundable transaction and
+                            agree to the Terms & Refund
+                            Policy.
+                        </span>
+
+                    </label>
+
+
+                    {/* PAYMENT ERROR */}
+                    {paymentError && (
+                        <div className="payment-error">
+                            {paymentError}
                         </div>
                     )}
 
-                    <h1>
-                        {streamer.displayName}
-                    </h1>
 
-                    <p className="streamer-username">
-                        @{streamer.username}
-                    </p>
+                    {/* SUBMIT */}
+                    <button
+                        type="submit"
+                        className="send-tip-button"
+                    >
+                        {amount
+                            ? `Send Tip · ${currency} ${amount}`
+                            : "Send Tip"}
+                    </button>
 
-                    {streamer.bio && (
-                        <p className="streamer-bio">
-                            {streamer.bio}
-                        </p>
-                    )}
 
-                </div>
+                    <div className="secure-payment">
+                        <span>🔒</span>
+                        Secure payment powered by Razorpay
+                    </div>
 
-                <form onSubmit={handleSubmit} className="tip-form">
+                </form>
 
-    <div className="form-group">
-        <label>Amount:</label>
+            </section>
 
-        <div className="amount-currency-row">
 
-            <input
-                type="number"
-                min="1"
-                placeholder="200"
-                value={amount}
-                onChange={(e) =>
-                    setAmount(e.target.value)
-                }
-            />
+            <footer className="tip-footer">
+                <strong>TipWave</strong>
+                <span>Support creators directly.</span>
+            </footer>
 
-            <select
-                value={currency}
-                onChange={(e) =>
-                    setCurrency(e.target.value)
-                }
-            >
-                <option value="INR">INR</option>
-                <option value="USD">USD</option>
-                <option value="EUR">EUR</option>
-                <option value="GBP">GBP</option>
-                <option value="CHF">CHF</option>
-                <option value="SGD">SGD</option>
-                <option value="CAD">CAD</option>
-                <option value="AUD">AUD</option>
-            </select>
+        </main>
 
-        </div>
     </div>
-
-    <div className="form-group">
-        <label>Email for Payment Receipt:</label>
-
-        <input
-            type="email"
-            placeholder="your@email.com"
-            value={email}
-            onChange={(e) =>
-                setEmail(e.target.value)
-            }
-        />
-    </div>
-
-    <div className="form-group">
-        <label>Name:</label>
-
-        <input
-            type="text"
-            placeholder="Your name"
-            value={name}
-            onChange={(e) =>
-                setName(e.target.value)
-            }
-        />
-    </div>
-
-    <div className="form-group">
-        <label>Message:</label>
-
-        <textarea
-            placeholder={`Message for ${streamer.displayName}`}
-            maxLength="200"
-            value={message}
-            onChange={(e) =>
-                setMessage(e.target.value)
-            }
-        />
-
-        <div className="message-count">
-            {200 - message.length} characters left
-        </div>
-    </div>
-
-    <label className="terms-box">
-
-        <input
-            type="checkbox"
-            checked={termsAccepted}
-            onChange={(e) =>
-                setTermsAccepted(
-                    e.target.checked
-                )
-            }
-        />
-
-        <span>
-            I acknowledge this is a non-refundable
-            transaction, fully rendered once displayed
-            to {streamer.displayName}. I also agree to
-            the Terms & Refund Policy.
-        </span>
-
-    </label>
-
-    {paymentError && (
-
-    <div className="payment-error">
-        {paymentError}
-    </div>
-
-)}
-
-    <button
-        type="submit"
-        className="send-tip-button"
-        style={{
-            background:
-                branding.buttonColor,
-            color: "#ffffff"
-        }}
-    >
-        {amount
-            ? `Send Tip ${currency} ${amount}`
-            : "Send Tip"}
-    </button>
-
-</form>
-            </div>
-
-        </div>
-    );
+);
 }
 
 export default TipPage;

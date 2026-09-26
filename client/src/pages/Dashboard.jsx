@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { io } from "socket.io-client";
+import '../styles/Dashboard.css';
 
 const API_URL =
     import.meta.env.VITE_API_URL;
@@ -556,24 +557,36 @@ const formatMoney = (amount, currency = "INR") => {
     }
 };
 
-    return (
-        <div className="dashboard">
+   return (
+    <div className="dashboard-page">
 
-            <div className="dashboard-header">
+        {/* ================= HEADER ================= */}
 
-                <div>
+        <header className="dashboard-topbar">
 
-                    <h1>
-                        Welcome, {user?.displayName}
-                    </h1>
+            <div className="dashboard-brand">
+                <div className="dashboard-brand-icon">
+                    T
+                </div>
 
-                    <p>
+                <span>TipWave</span>
+            </div>
+
+            <div className="dashboard-user-actions">
+
+                <div className="dashboard-user">
+                    <span className="dashboard-user-name">
+                        {user?.displayName || user?.username}
+                    </span>
+
+                    <span className="dashboard-user-username">
                         @{user?.username}
-                    </p>
-
+                    </span>
                 </div>
 
                 <button
+                    type="button"
+                    className="dashboard-logout"
                     onClick={handleLogout}
                 >
                     Logout
@@ -581,735 +594,700 @@ const formatMoney = (amount, currency = "INR") => {
 
             </div>
 
-           <div className="stats-grid">
+        </header>
 
-    <div className="stat-card">
 
-        <p>
-            Total Received
-        </p>
+        {/* ================= CONTENT ================= */}
 
-        <div>
-            {Object.entries(
-                stats.totalsByCurrency || {}
-            ).length > 0 ? (
+        <main className="dashboard-content">
 
-                Object.entries(
-                    stats.totalsByCurrency
-                ).map(
-                    ([currency, amount]) => (
+            {/* PAGE HEADING */}
 
-                        <h2 key={currency}>
-                            {formatMoney(
-                                amount,
-                                currency
+            <section className="dashboard-heading">
+
+                <div>
+                    <p className="dashboard-eyebrow">
+                        CREATOR DASHBOARD
+                    </p>
+
+                    <h1>
+                        Welcome back,{" "}
+                        {user?.displayName || user?.username}
+                    </h1>
+
+                    <p className="dashboard-subtitle">
+                        Manage your tips, profile and stream alerts.
+                    </p>
+                </div>
+
+            </section>
+
+
+            {/* ================= STATS ================= */}
+
+            <section className="dashboard-stats">
+
+                {/* TOTAL RECEIVED */}
+
+                <div className="dashboard-stat-card">
+
+                    <div className="stat-icon">
+                        ₹
+                    </div>
+
+                    <div className="stat-content">
+
+                        <p className="stat-label">
+                            Total Received
+                        </p>
+
+                        <div className="stat-values">
+
+                            {Object.entries(
+                                stats.totalsByCurrency || {}
+                            ).length > 0 ? (
+
+                                Object.entries(
+                                    stats.totalsByCurrency
+                                ).map(
+                                    ([currency, amount]) => (
+
+                                        <h2 key={currency}>
+                                            {formatMoney(
+                                                amount,
+                                                currency
+                                            )}
+                                        </h2>
+
+                                    )
+                                )
+
+                            ) : (
+
+                                <h2>₹0</h2>
+
                             )}
+
+                        </div>
+
+                        <span className="stat-description">
+                            From completed tips
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                {/* TOTAL TIPS */}
+
+                <div className="dashboard-stat-card">
+
+                    <div className="stat-icon">
+                        #
+                    </div>
+
+                    <div className="stat-content">
+
+                        <p className="stat-label">
+                            Total Tips
+                        </p>
+
+                        <h2>
+                            {stats.totalTips || 0}
                         </h2>
 
-                    )
-                )
+                        <span className="stat-description">
+                            Successful contributions
+                        </span>
 
-            ) : (
-
-                <h2>
-                    ₹0
-                </h2>
-
-            )}
-        </div>
-
-    </div>
-
-
-    <div className="stat-card">
-
-        <p>
-            Total Tips
-        </p>
-
-        <h2>
-            {stats.totalTips || 0}
-        </h2>
-
-    </div>
-
-<div className="stat-card">
-
-    <p>
-        Top Tip
-    </p>
-
-    <div>
-        {Object.entries(
-            stats.topTipsByCurrency || {}
-        ).length > 0 ? (
-
-            Object.entries(
-                stats.topTipsByCurrency
-            ).map(
-                ([currency, amount]) => (
-
-                    <h2 key={currency}>
-                        {formatMoney(
-                            amount,
-                            currency
-                        )}
-                    </h2>
-
-                )
-            )
-
-        ) : (
-
-            <h2>
-                ₹0
-            </h2>
-
-        )}
-    </div>
-
-</div>
-
-</div>
-
-            <div className="dashboard-links">
-
-                <div>
-
-                    <p>
-                        Your Tip Link
-                    </p>
-
-                    <span>
-                        {tipUrl}
-                    </span>
-
-                    <button
-                        onClick={() =>
-                            copyToClipboard(
-                                tipUrl
-                            )
-                        }
-                    >
-                        Copy Tip Link
-                    </button>
+                    </div>
 
                 </div>
 
-                <div>
 
-                    <p>
-                        OBS Overlay URL
-                    </p>
+                {/* TOP TIP */}
 
-                    <span>
-                        {
-                            overlayUrl ||
-                            "Loading..."
-                        }
-                    </span>
+                <div className="dashboard-stat-card">
 
-                    <button
-                        disabled={!overlayUrl}
-                        onClick={() =>
-                            copyToClipboard(
-                                overlayUrl
-                            )
-                        }
-                    >
-                        Copy OBS Link
-                    </button>
+                    <div className="stat-icon">
+                        ↑
+                    </div>
 
-                </div>
+                    <div className="stat-content">
 
-            </div>
+                        <p className="stat-label">
+                            Top Tip
+                        </p>
 
-<div className="alert-settings-section">
+                        <div className="stat-values">
 
-    <h2>
-        Alert Settings
-    </h2>
+                            {Object.entries(
+                                stats.topTipsByCurrency || {}
+                            ).length > 0 ? (
 
-    <div className="settings-grid">
+                                Object.entries(
+                                    stats.topTipsByCurrency
+                                ).map(
+                                    ([currency, amount]) => (
 
-        <div>
+                                        <h2 key={currency}>
+                                            {formatMoney(
+                                                amount,
+                                                currency
+                                            )}
+                                        </h2>
 
-            <label>
-                Alert Duration
-            </label>
-
-            <input
-                type="number"
-                min="2"
-                max="30"
-                value={
-                    alertSettings.duration
-                }
-                onChange={(e) =>
-                    setAlertSettings({
-                        ...alertSettings,
-
-                        duration:
-                            Number(
-                                e.target.value
-                            )
-                    })
-                }
-            />
-
-            <small>
-                Seconds
-            </small>
-
-        </div>
-
-        <div>
-
-            <label>
-                Minimum Tip Amount
-            </label>
-
-            <input
-                type="number"
-                min="1"
-                value={
-                    alertSettings.minimumAmount
-                }
-                onChange={(e) =>
-                    setAlertSettings({
-                        ...alertSettings,
-
-                        minimumAmount:
-                            Number(
-                                e.target.value
-                            )
-                    })
-                }
-            />
-
-        </div>
-
-        <div>
-
-            <label>
-                Message Font Size
-            </label>
-
-            <input
-                type="number"
-                min="12"
-                max="60"
-                value={
-                    alertSettings.fontSize
-                }
-                onChange={(e) =>
-                    setAlertSettings({
-                        ...alertSettings,
-
-                        fontSize:
-                            Number(
-                                e.target.value
-                            )
-                    })
-                }
-            />
-
-        </div>
-
-        <div>
-
-            <label>
-
-                <input
-                    type="checkbox"
-                    checked={
-                        alertSettings.showMessage
-                    }
-                    onChange={(e) =>
-                        setAlertSettings({
-                            ...alertSettings,
-
-                            showMessage:
-                                e.target.checked
-                        })
-                    }
-                />
-
-                Show viewer message
-
-            </label>
-
-        </div>
-
-    </div>
-
-    <button
-        onClick={
-            saveAlertSettings
-        }
-        disabled={
-            savingSettings
-        }
-    >
-        {
-            savingSettings
-                ? "Saving..."
-                : "Save Alert Settings"
-        }
-    </button>
-
-    <button
-    type="button"
-    onClick={sendTestAlert}
->
-    Test OBS Alert
-</button>
-
-</div>
-<div className="profile-settings-section">
-
-    <h2>
-        Profile Settings
-    </h2>
-
-    {profile.profileImage && (
-        <img
-            src={profile.profileImage}
-            alt="Profile"
-            className="dashboard-profile-image"
-        />
-    )}
-
-    <div className="profile-form">
-
-        <div>
-            <label>
-                Display Name
-            </label>
-
-            <input
-                type="text"
-                maxLength="50"
-                value={
-                    profile.displayName
-                }
-                onChange={(e) =>
-                    setProfile({
-                        ...profile,
-                        displayName:
-                            e.target.value
-                    })
-                }
-            />
-        </div>
-
-        <div>
-            <label>
-                Bio
-            </label>
-
-            <textarea
-                maxLength="200"
-                value={
-                    profile.bio
-                }
-                onChange={(e) =>
-                    setProfile({
-                        ...profile,
-                        bio:
-                            e.target.value
-                    })
-                }
-                placeholder="Tell your viewers something about yourself..."
-            />
-
-            <small>
-                {profile.bio.length}/200
-            </small>
-        </div>
-
-        <div>
-
-   <div>
-
-    <label>
-        Profile Image
-    </label>
-
-    <input
-        type="file"
-        accept="image/png,image/jpeg,image/webp"
-        onChange={(e) =>
-            setSelectedImage(
-                e.target.files[0] || null
-            )
-        }
-    />
-
-    {selectedImage && (
-        <div>
-            <p>New image preview:</p>
-
-            <img
-                src={URL.createObjectURL(
-                    selectedImage
-                )}
-                alt="Preview"
-                className="dashboard-profile-image"
-            />
-        </div>
-    )}
-
-</div>
-
-</div>
-
-    </div>
-
-    <button
-    type="button"
-        onClick={saveProfile}
-        disabled={savingProfile}
-    >
-        {savingProfile
-            ? "Saving..."
-            : "Save Profile"}
-    </button>
-
-</div>
-
-<div className="branding-settings-section">
-
-    <h2>
-        Page Branding
-    </h2>
-
-    <div className="branding-grid">
-
-        <div>
-            <label>
-                Accent Color
-            </label>
-
-            <input
-                type="color"
-                value={
-                    brandingSettings.accentColor
-                }
-                onChange={(e) =>
-                    setBrandingSettings({
-                        ...brandingSettings,
-                        accentColor:
-                            e.target.value
-                    })
-                }
-            />
-        </div>
-
-        <div>
-            <label>
-                Button Color
-            </label>
-
-            <input
-                type="color"
-                value={
-                    brandingSettings.buttonColor
-                }
-                onChange={(e) =>
-                    setBrandingSettings({
-                        ...brandingSettings,
-                        buttonColor:
-                            e.target.value
-                    })
-                }
-            />
-        </div>
-
-        <div>
-            <label>
-                Background Color
-            </label>
-
-            <input
-                type="color"
-                value={
-                    brandingSettings.backgroundColor
-                }
-                onChange={(e) =>
-                    setBrandingSettings({
-                        ...brandingSettings,
-                        backgroundColor:
-                            e.target.value
-                    })
-                }
-            />
-        </div>
-
-        <div>
-            <label>
-                Card Color
-            </label>
-
-            <input
-                type="color"
-                value={
-                    brandingSettings.cardColor
-                }
-                onChange={(e) =>
-                    setBrandingSettings({
-                        ...brandingSettings,
-                        cardColor:
-                            e.target.value
-                    })
-                }
-            />
-        </div>
-
-       <div className="custom-amounts-section">
-
-    <h3>Preset Tip Amounts</h3>
-
-    <p>
-        Choose the four amounts viewers will see.
-    </p>
-
-    <div className="custom-amounts-grid">
-
-        {(
-            brandingSettings.tipAmounts ||
-            [50, 100, 500, 1000]
-        ).map((amount, index) => (
-
-            <div key={index}>
-
-                <label>
-                    Amount {index + 1}
-                </label>
-
-                <div className="amount-input-wrapper">
-
-                    <span>₹</span>
-
-                    <input
-                        type="number"
-                        min="1"
-                        max="100000"
-                        value={amount}
-                        onChange={(e) => {
-
-                            const updatedAmounts = [
-                                ...(
-                                    brandingSettings.tipAmounts ||
-                                    [50, 100, 500, 1000]
+                                    )
                                 )
-                            ];
 
-                            updatedAmounts[index] =
-                                e.target.value === ""
-                                    ? ""
-                                    : Number(e.target.value);
+                            ) : (
 
-                            setBrandingSettings({
-                                ...brandingSettings,
-                                tipAmounts: updatedAmounts
-                            });
+                                <h2>₹0</h2>
 
-                        }}
-                    />
+                            )}
+
+                        </div>
+
+                        <span className="stat-description">
+                            Highest contribution
+                        </span>
+
+                    </div>
 
                 </div>
 
-            </div>
+            </section>
 
-        ))}
 
-    </div>
+            {/* ================= LINKS ================= */}
 
-</div>
+            <section className="dashboard-section">
 
-    </div>
-    <div
-    className="branding-preview"
-    style={{
-        background:
-            brandingSettings.backgroundColor
-    }}
->
-    <div
-        className="branding-preview-card"
-        style={{
-            background:
-                brandingSettings.cardColor
-        }}
-    >
+                <div className="section-heading">
+                    <div>
+                        <h2>Your Links</h2>
 
-        {profile.profileImage && (
-            <img
-                src={profile.profileImage}
-                alt="Profile"
-                className="branding-preview-image"
-            />
-        )}
+                        <p>
+                            Share your tip page and connect your
+                            OBS overlay.
+                        </p>
+                    </div>
+                </div>
 
-        <h3>
-            {profile.displayName || "Streamer Name"}
-        </h3>
 
-        <p>
-            @{user?.username}
-        </p>
+                <div className="dashboard-link-grid">
 
-        {profile.bio && (
-            <p>
-                {profile.bio}
-            </p>
-        )}
+                    {/* TIP LINK */}
 
-       <div className="branding-preview-amounts">
-{(
-    brandingSettings.tipAmounts ||
-    [50, 100, 500, 1000]
-).map((amount, index) => (
+                    <div className="dashboard-link-card">
 
-            <button
-                key={index}
-                type="button"
-                style={
-                    index === 0
-                        ? {
-                            background:
-                                brandingSettings
-                                    .accentColor,
+                        <div className="link-card-header">
 
-                            borderColor:
-                                brandingSettings
-                                    .accentColor,
+                            <div className="link-icon">
+                                ↗
+                            </div>
 
-                            color:
-                                "white"
-                        }
-                        : {}
-                }
-            >
-                ₹{amount}
-            </button>
+                            <div>
+                                <h3>Tip Page</h3>
 
-        )
-    )}
+                                <p>
+                                    Share this link with your viewers.
+                                </p>
+                            </div>
 
-</div>
+                        </div>
 
-        <input
-            type="text"
-            placeholder="Your name"
-            disabled
-        />
 
-        <textarea
-            placeholder="Your message..."
-            disabled
-        />
+                        <div className="link-value">
+                            <span>
+                                {tipUrl}
+                            </span>
 
-        <button
-            type="button"
-            className="branding-preview-send"
-            style={{
-                background:
-                    brandingSettings.buttonColor
-            }}
-        >
-            Send Tip ₹100
-        </button>
+                            <button
+                                type="button"
+                                onClick={() =>
+                                    copyToClipboard(tipUrl)
+                                }
+                            >
+                                Copy
+                            </button>
+                        </div>
 
-    </div>
-</div>
+                    </div>
 
-    <button
-        type="button"
-        onClick={saveBrandingSettings}
-        disabled={savingBranding}
-    >
-        {savingBranding
-            ? "Saving..."
-            : "Save Branding"}
-    </button>
 
-</div>
-            
-            <div className="tips-section">
-                        
-             <div className="recent-tips-header">
+                    {/* OBS LINK */}
 
-    <h2>Recent Tips</h2>
+                    <div className="dashboard-link-card">
 
-    <button
-        type="button"
-        className="view-all-tips-button"
-        onClick={() =>
-            navigate("/dashboard/tips")
-        }
-    >
-        View All Tips
-    </button>
+                        <div className="link-card-header">
 
-</div>
-                {
-                    tips.length === 0
-                        ? (
-                            <p>
-                                No paid tips yet.
-                            </p>
-                        )
-                        : (
-                            <div className="tips-table">
+                            <div className="link-icon">
+                                ◉
+                            </div>
 
-                                {
-                                    tips.map(
-                                        (tip) => (
+                            <div>
+                                <h3>OBS Overlay</h3>
 
-                                            <div
-                                                className="tip-row"
-                                                key={tip._id}
-                                            >
+                                <p>
+                                    Add this URL as an OBS Browser Source.
+                                </p>
+                            </div>
 
-                                                <div>
+                        </div>
 
-                                                    <strong>
-                                                        {
-                                                            tip.donorName
-                                                        }
-                                                    </strong>
 
-                                                    <p>
-                                                        {
-                                                            tip.message
-                                                        }
-                                                    </p>
+                        <div className="link-value">
 
-                                                </div>
+                            <span>
+                                {overlayUrl || "Loading..."}
+                            </span>
 
-                                                <strong>
-                                                 {formatMoney(
-    tip.amount,
-    tip.currency
-)}
-                                                </strong>
-
-                                            </div>
-
-                                        )
+                            <button
+                                type="button"
+                                disabled={!overlayUrl}
+                                onClick={() =>
+                                    copyToClipboard(
+                                        overlayUrl
                                     )
                                 }
+                            >
+                                Copy
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            {/* ================= SETTINGS GRID ================= */}
+
+            <div className="dashboard-settings-grid">
+
+
+                {/* ================= PROFILE ================= */}
+
+                <section className="dashboard-panel profile-panel">
+
+                    <div className="panel-heading">
+
+                        <div>
+                            <h2>Profile</h2>
+
+                            <p>
+                                Manage how viewers see you.
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <div className="dashboard-profile-header">
+
+                        {selectedImage ? (
+
+                            <img
+                                src={URL.createObjectURL(
+                                    selectedImage
+                                )}
+                                alt="Preview"
+                                className="dashboard-new-avatar"
+                            />
+
+                        ) : profile.profileImage ? (
+
+                            <img
+                                src={profile.profileImage}
+                                alt="Profile"
+                                className="dashboard-new-avatar"
+                            />
+
+                        ) : (
+
+                            <div className="dashboard-avatar-placeholder">
+                                {(profile.displayName ||
+                                    user?.username ||
+                                    "?")
+                                    .charAt(0)
+                                    .toUpperCase()}
+                            </div>
+
+                        )}
+
+
+                        <div className="profile-upload-area">
+
+                            <strong>
+                                Profile picture
+                            </strong>
+
+                            <span>
+                                PNG, JPG or WebP
+                            </span>
+
+                            <label className="profile-upload-button">
+
+                                Change image
+
+                                <input
+                                    type="file"
+                                    accept="image/png,image/jpeg,image/webp"
+                                    onChange={(e) =>
+                                        setSelectedImage(
+                                            e.target.files[0] ||
+                                            null
+                                        )
+                                    }
+                                />
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+
+                    <div className="dashboard-form-group">
+
+                        <label>
+                            Display Name
+                        </label>
+
+                        <input
+                            type="text"
+                            maxLength="50"
+                            value={profile.displayName}
+                            onChange={(e) =>
+                                setProfile({
+                                    ...profile,
+                                    displayName:
+                                        e.target.value
+                                })
+                            }
+                            placeholder="Your display name"
+                        />
+
+                    </div>
+
+
+                    <div className="dashboard-form-group">
+
+                        <div className="dashboard-label-row">
+
+                            <label>
+                                Bio
+                            </label>
+
+                            <span>
+                                {profile.bio.length}/200
+                            </span>
+
+                        </div>
+
+                        <textarea
+                            maxLength="200"
+                            value={profile.bio}
+                            onChange={(e) =>
+                                setProfile({
+                                    ...profile,
+                                    bio: e.target.value
+                                })
+                            }
+                            placeholder="Tell your viewers something about yourself..."
+                        />
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        className="dashboard-primary-button"
+                        onClick={saveProfile}
+                        disabled={savingProfile}
+                    >
+                        {savingProfile
+                            ? "Saving..."
+                            : "Save Profile"}
+                    </button>
+
+                </section>
+
+
+                {/* ================= ALERT SETTINGS ================= */}
+
+                <section className="dashboard-panel alerts-panel">
+
+                    <div className="panel-heading">
+
+                        <div>
+                            <h2>Alert Settings</h2>
+
+                            <p>
+                                Configure your OBS tip alerts.
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <div className="alert-form-grid">
+
+                        <div className="dashboard-form-group">
+
+                            <label>
+                                Alert Duration
+                            </label>
+
+                            <div className="input-with-suffix">
+
+                                <input
+                                    type="number"
+                                    min="2"
+                                    max="30"
+                                    value={
+                                        alertSettings.duration
+                                    }
+                                    onChange={(e) =>
+                                        setAlertSettings({
+                                            ...alertSettings,
+                                            duration:
+                                                Number(
+                                                    e.target.value
+                                                )
+                                        })
+                                    }
+                                />
+
+                                <span>sec</span>
 
                             </div>
-                        )
-                }
+
+                        </div>
+
+
+                        <div className="dashboard-form-group">
+
+                            <label>
+                                Minimum Tip
+                            </label>
+
+                            <input
+                                type="number"
+                                min="1"
+                                value={
+                                    alertSettings.minimumAmount
+                                }
+                                onChange={(e) =>
+                                    setAlertSettings({
+                                        ...alertSettings,
+                                        minimumAmount:
+                                            Number(
+                                                e.target.value
+                                            )
+                                    })
+                                }
+                            />
+
+                        </div>
+
+
+                        <div className="dashboard-form-group">
+
+                            <label>
+                                Message Font Size
+                            </label>
+
+                            <div className="input-with-suffix">
+
+                                <input
+                                    type="number"
+                                    min="12"
+                                    max="60"
+                                    value={
+                                        alertSettings.fontSize
+                                    }
+                                    onChange={(e) =>
+                                        setAlertSettings({
+                                            ...alertSettings,
+                                            fontSize:
+                                                Number(
+                                                    e.target.value
+                                                )
+                                        })
+                                    }
+                                />
+
+                                <span>px</span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <label className="dashboard-toggle-row">
+
+                        <div>
+
+                            <strong>
+                                Show viewer message
+                            </strong>
+
+                            <span>
+                                Display the viewer's message
+                                in your OBS alert.
+                            </span>
+
+                        </div>
+
+                        <input
+                            type="checkbox"
+                            checked={
+                                alertSettings.showMessage
+                            }
+                            onChange={(e) =>
+                                setAlertSettings({
+                                    ...alertSettings,
+                                    showMessage:
+                                        e.target.checked
+                                })
+                            }
+                        />
+
+                    </label>
+
+
+                    <div className="alert-actions">
+
+                        <button
+                            type="button"
+                            className="dashboard-primary-button"
+                            onClick={saveAlertSettings}
+                            disabled={savingSettings}
+                        >
+                            {savingSettings
+                                ? "Saving..."
+                                : "Save Settings"}
+                        </button>
+
+                        <button
+                            type="button"
+                            className="dashboard-secondary-button"
+                            onClick={sendTestAlert}
+                        >
+                            Test OBS Alert
+                        </button>
+
+                    </div>
+
+                </section>
 
             </div>
 
-        </div>
-    );
+
+            {/* ================= RECENT TIPS ================= */}
+
+            <section className="dashboard-panel recent-tips-panel">
+
+                <div className="recent-tips-new-header">
+
+                    <div>
+                        <h2>Recent Tips</h2>
+
+                        <p>
+                            Your latest successful contributions.
+                        </p>
+                    </div>
+
+                    <button
+                        type="button"
+                        className="view-all-new-button"
+                        onClick={() =>
+                            navigate("/dashboard/tips")
+                        }
+                    >
+                        View all tips →
+                    </button>
+
+                </div>
+
+
+                {tips.length === 0 ? (
+
+                    <div className="dashboard-empty-state">
+
+                        <div className="empty-state-icon">
+                            ♡
+                        </div>
+
+                        <h3>
+                            No tips yet
+                        </h3>
+
+                        <p>
+                            Your latest paid tips will appear here.
+                        </p>
+
+                    </div>
+
+                ) : (
+
+                    <div className="dashboard-tips-list">
+
+                        {tips.map((tip) => (
+
+                            <div
+                                className="dashboard-tip-item"
+                                key={tip._id}
+                            >
+
+                                <div className="tip-user-avatar">
+                                    {tip.donorName
+                                        ?.charAt(0)
+                                        .toUpperCase() || "?"}
+                                </div>
+
+
+                                <div className="tip-information">
+
+                                    <strong>
+                                        {tip.donorName}
+                                    </strong>
+
+                                    <p>
+                                        {tip.message}
+                                    </p>
+
+                                </div>
+
+
+                                <strong className="tip-value">
+                                    {formatMoney(
+                                        tip.amount,
+                                        tip.currency
+                                    )}
+                                </strong>
+
+                            </div>
+
+                        ))}
+
+                    </div>
+
+                )}
+
+            </section>
+
+        </main>
+
+    </div>
+);
 }
 
 export default Dashboard;

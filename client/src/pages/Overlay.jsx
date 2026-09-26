@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { io } from "socket.io-client";
+import '../styles/Overlay.css';
+
 
 const API_URL =
     import.meta.env.VITE_API_URL;
@@ -244,51 +246,78 @@ function Overlay() {
 
 
     return (
+    <div className="overlay-page">
 
-        <div className="overlay-page">
+        {tip && (
 
-            {tip && (
+            <div className="tip-alert">
 
-                <div className="tip-alert">
+                {/* ICON */}
 
-                    <h2>
-                        🎉 NEW TIP 🎉
-                    </h2>
+                <div className="overlay-tip-icon">
+                    ♥
+                </div>
 
-                    <h1>
-                        {formatMoney(
-    tip.amount,
-    tip.currency
-)}
-                    </h1>
 
-                    <h3>
-                        from {tip.donorName}
-                    </h3>
+                {/* CONTENT */}
 
-                    {
-                        settings.showMessage && (
+                <div className="overlay-tip-content">
 
-                            <p
-                                style={{
-                                    fontSize:
-                                        `${settings.fontSize}px`
-                                }}
-                            >
+                    <div className="overlay-tip-label">
+                        NEW TIP
+                    </div>
 
-                                {tip.message}
 
-                            </p>
+                    <div className="overlay-tip-main">
 
-                        )
-                    }
+                        <span className="overlay-donor">
+                            {tip.donorName || "Anonymous"}
+                        </span>
+
+                        <span className="overlay-text">
+                            tipped
+                        </span>
+
+                        <span className="overlay-amount">
+                            {formatMoney(
+                                tip.amount,
+                                tip.currency
+                            )}
+                        </span>
+
+                    </div>
+
+
+                    {settings.showMessage &&
+                        tip.message && (
+
+                        <p
+                            className="overlay-message"
+                            style={{
+                                fontSize:
+                                    `${settings.fontSize}px`
+                            }}
+                        >
+                            “{tip.message}”
+                        </p>
+
+                    )}
 
                 </div>
 
-            )}
 
-        </div>
-    );
+                {/* TIPWAVE MARK */}
+
+                <div className="overlay-brand">
+                    TipWave
+                </div>
+
+            </div>
+
+        )}
+
+    </div>
+);
 }
 
 export default Overlay;

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import '../styles/Auth.css';
 
 const API_URL =
     import.meta.env.VITE_API_URL;
@@ -46,39 +47,125 @@ function Login() {
         }
     };
 
-    return (
-        <div>
-            <h1>Login to TipWave</h1>
+  return (
+    <div className="auth-page">
 
-            {error && <p>{error}</p>}
+        <div className="auth-background-glow auth-glow-one"></div>
+        <div className="auth-background-glow auth-glow-two"></div>
 
-            <form onSubmit={handleSubmit}>
+        <div className="auth-container">
 
-                <input
-                    type="email"
-                    placeholder="Email"
-                    value={email}
-                    onChange={(e) =>
-                        setEmail(e.target.value)
-                    }
-                />
+            {/* BRAND */}
 
-                <input
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) =>
-                        setPassword(e.target.value)
-                    }
-                />
+            <div className="auth-brand">
+                <div className="auth-brand-icon">
+                    T
+                </div>
 
-                <button type="submit">
-                    Login
-                </button>
+                <span>TipWave</span>
+            </div>
 
-            </form>
+
+            {/* CARD */}
+
+            <div className="auth-card">
+
+                <div className="auth-card-header">
+
+                    <h1>Welcome back</h1>
+
+                    <p>
+                        Sign in to manage your tips and
+                        stream alerts.
+                    </p>
+
+                </div>
+
+
+                {error && (
+                    <div className="auth-error">
+                        <span>!</span>
+                        <p>{error}</p>
+                    </div>
+                )}
+
+
+                <form
+                    className="auth-form"
+                    onSubmit={handleSubmit}
+                >
+
+                    <div className="auth-field">
+
+                        <label>Email address</label>
+
+                        <input
+                            type="email"
+                            placeholder="you@example.com"
+                            value={email}
+                            onChange={(e) =>
+                                setEmail(e.target.value)
+                            }
+                        />
+
+                    </div>
+
+
+                    <div className="auth-field">
+
+                        <label>Password</label>
+
+                        <input
+                            type="password"
+                            placeholder="Enter your password"
+                            value={password}
+                            onChange={(e) =>
+                                setPassword(e.target.value)
+                            }
+                        />
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        className="auth-submit"
+                    >
+                        Sign in
+                    </button>
+
+                </form>
+
+
+                <div className="auth-divider">
+                    <span></span>
+                </div>
+
+
+                <p className="auth-switch">
+                    New to TipWave?{" "}
+
+                    <button
+                        type="button"
+                        onClick={() =>
+                            navigate("/register")
+                        }
+                    >
+                        Create an account
+                    </button>
+                </p>
+
+            </div>
+
+
+            <p className="auth-footer">
+                Support creators. Make an impact.
+            </p>
+
         </div>
-    );
+
+    </div>
+);
 }
 
 export default Login;

@@ -1,0 +1,407 @@
+/* =========================================================
+   TIPWAVE - OBS TIP OVERLAY
+   ========================================================= */
+
+html,
+body,
+#root {
+    background: transparent !important;
+}
+
+
+/* =========================
+   OVERLAY PAGE
+   ========================= */
+
+.overlay-page {
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+
+    padding: 40px;
+
+    box-sizing: border-box;
+
+    background: transparent !important;
+
+    overflow: hidden;
+
+    pointer-events: none;
+}
+
+
+/* =========================
+   TIP ALERT
+   ========================= */
+
+.tip-alert {
+    width: min(620px, calc(100vw - 40px));
+
+    padding: 20px 22px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 16px;
+
+    position: relative;
+
+    background:
+        rgba(17, 24, 39, 0.94);
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.13);
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 20px 55px
+        rgba(0, 0, 0, 0.32);
+
+    backdrop-filter: blur(14px);
+
+    animation:
+        tipwaveAlertIn
+        0.55s
+        cubic-bezier(0.16, 1, 0.3, 1)
+        both;
+}
+
+
+/* Purple top accent */
+
+.tip-alert::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 28px;
+    right: 28px;
+
+    height: 3px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #6366f1,
+            #8b5cf6,
+            transparent
+        );
+
+    border-radius: 0 0 10px 10px;
+}
+
+
+/* =========================
+   ICON
+   ========================= */
+
+.overlay-tip-icon {
+    width: 52px;
+    height: 52px;
+
+    flex: 0 0 52px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #4f46e5,
+            #7c3aed
+        );
+
+    border-radius: 15px;
+
+    color: #ffffff;
+
+    font-size: 22px;
+
+    box-shadow:
+        0 8px 22px
+        rgba(99, 102, 241, 0.35);
+
+    animation:
+        tipwaveHeartPop
+        0.65s
+        0.15s
+        cubic-bezier(0.16, 1, 0.3, 1)
+        both;
+}
+
+
+/* =========================
+   CONTENT
+   ========================= */
+
+.overlay-tip-content {
+    min-width: 0;
+
+    flex: 1;
+}
+
+
+/* NEW TIP */
+
+.overlay-tip-label {
+    margin-bottom: 5px;
+
+    color: #a5b4fc;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 1.4px;
+}
+
+
+/* MAIN LINE */
+
+.overlay-tip-main {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+
+    gap: 5px;
+
+    line-height: 1.3;
+}
+
+.overlay-donor {
+    max-width: 210px;
+
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+    color: #ffffff;
+
+    font-size: 18px;
+    font-weight: 750;
+}
+
+.overlay-text {
+    color: #9ca3af;
+
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.overlay-amount {
+    color: #a5b4fc;
+
+    font-size: 20px;
+    font-weight: 800;
+
+    letter-spacing: -0.3px;
+}
+
+
+/* =========================
+   MESSAGE
+   ========================= */
+
+.overlay-message {
+    max-width: 430px;
+
+    margin: 8px 0 0;
+
+    overflow-wrap: anywhere;
+
+    color: #e5e7eb;
+
+    font-weight: 450;
+
+    line-height: 1.45;
+}
+
+
+/* =========================
+   BRAND
+   ========================= */
+
+.overlay-brand {
+    align-self: flex-start;
+
+    margin-left: 8px;
+
+    color:
+        rgba(255, 255, 255, 0.32);
+
+    font-size: 9px;
+    font-weight: 700;
+
+    letter-spacing: 0.3px;
+}
+
+
+/* =========================================================
+   ANIMATIONS
+   ========================================================= */
+
+@keyframes tipwaveAlertIn {
+
+    0% {
+        opacity: 0;
+
+        transform:
+            translateY(45px)
+            scale(0.94);
+    }
+
+    60% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+
+@keyframes tipwaveHeartPop {
+
+    0% {
+        opacity: 0;
+
+        transform:
+            scale(0.4)
+            rotate(-12deg);
+    }
+
+    70% {
+        transform:
+            scale(1.08)
+            rotate(3deg);
+    }
+
+    100% {
+        opacity: 1;
+
+        transform:
+            scale(1)
+            rotate(0);
+    }
+}
+
+
+/* =========================
+   SUBTLE GLOW
+   ========================= */
+
+.tip-alert::after {
+    content: "";
+
+    position: absolute;
+
+    width: 120px;
+    height: 120px;
+
+    left: -35px;
+    top: -35px;
+
+    z-index: -1;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(99, 102, 241, 0.22),
+            transparent 70%
+        );
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   SMALL OBS CANVAS
+   ========================================================= */
+
+@media (max-width: 650px) {
+
+    .overlay-page {
+        padding: 20px;
+    }
+
+    .tip-alert {
+        width: 100%;
+
+        padding: 17px;
+
+        gap: 13px;
+
+        border-radius: 15px;
+    }
+
+    .overlay-tip-icon {
+        width: 45px;
+        height: 45px;
+
+        flex-basis: 45px;
+
+        border-radius: 13px;
+
+        font-size: 19px;
+    }
+
+    .overlay-donor {
+        max-width: 150px;
+
+        font-size: 15px;
+    }
+
+    .overlay-text {
+        font-size: 12px;
+    }
+
+    .overlay-amount {
+        font-size: 17px;
+    }
+
+    .overlay-brand {
+        display: none;
+    }
+}
+
+
+/* =========================================================
+   VERY SMALL OBS CANVAS
+   ========================================================= */
+
+@media (max-width: 420px) {
+
+    .overlay-page {
+        padding: 12px;
+    }
+
+    .tip-alert {
+        padding: 14px;
+    }
+
+    .overlay-tip-icon {
+        width: 40px;
+        height: 40px;
+
+        flex-basis: 40px;
+    }
+
+    .overlay-tip-main {
+        gap: 3px;
+    }
+
+    .overlay-donor {
+        max-width: 110px;
+    }
+}

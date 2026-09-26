@@ -780,3 +780,934 @@ form > button:hover {
     color: #991b1b;
     font-size: 14px;
 }
+
+
+/* new updated */
+
+/* =====================================================
+   TIPWAVE - PUBLIC TIP PAGE REDESIGN
+   ===================================================== */
+
+.tip-page {
+    min-height: 100vh;
+    padding: 55px 20px 70px;
+
+    background:
+        radial-gradient(
+            circle at top,
+            rgba(99, 102, 241, 0.10),
+            transparent 35%
+        ),
+        #f7f8fc;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.tip-container {
+    width: 100%;
+    max-width: 620px;
+}
+
+
+/* =========================
+   CREATOR SECTION
+   ========================= */
+
+.creator-section {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.creator-section .profile-image,
+.creator-section .profile-placeholder {
+    width: 92px;
+    height: 92px;
+
+    margin: 0 auto 16px;
+
+    border-radius: 50%;
+
+    border: 4px solid #ffffff;
+
+    box-shadow:
+        0 8px 25px
+        rgba(15, 23, 42, 0.12);
+}
+
+.creator-section .profile-image {
+    display: block;
+    object-fit: cover;
+}
+
+.creator-section .profile-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #4f46e5,
+            #7c3aed
+        );
+
+    color: white;
+
+    font-size: 34px;
+    font-weight: 700;
+}
+
+.creator-name {
+    margin: 0;
+
+    color: #111827;
+
+    font-size: 30px;
+    font-weight: 750;
+
+    letter-spacing: -0.5px;
+}
+
+.creator-section .streamer-username {
+    margin: 5px 0 0;
+
+    color: #6b7280;
+
+    font-size: 15px;
+}
+
+.creator-section .streamer-bio {
+    max-width: 460px;
+
+    margin: 12px auto 0;
+
+    color: #6b7280;
+
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+
+/* =========================
+   MAIN CARD
+   ========================= */
+
+.tip-page .tip-card {
+    width: 100%;
+    max-width: none;
+
+    padding: 34px;
+
+    background: rgba(255, 255, 255, 0.96);
+
+    border: 1px solid #e8eaf0;
+
+    border-radius: 22px;
+
+    box-shadow:
+        0 20px 60px
+        rgba(15, 23, 42, 0.08);
+}
+
+.tip-card-header {
+    margin-bottom: 28px;
+}
+
+.tip-card-header h2 {
+    margin: 0 0 7px;
+
+    color: #111827;
+
+    font-size: 23px;
+    font-weight: 700;
+
+    letter-spacing: -0.3px;
+}
+
+.tip-card-header p {
+    margin: 0;
+
+    color: #6b7280;
+
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+
+/* =========================
+   FORM
+   ========================= */
+
+.tip-page .tip-form {
+    display: flex;
+    flex-direction: column;
+
+    gap: 22px;
+}
+
+.tip-page .form-group {
+    display: flex;
+    flex-direction: column;
+
+    gap: 9px;
+}
+
+.tip-page .form-group > label,
+.tip-page .field-heading label {
+    margin: 0;
+
+    color: #1f2937;
+
+    font-size: 14px;
+    font-weight: 650;
+}
+
+.field-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 12px;
+}
+
+.field-heading > span {
+    color: #9ca3af;
+
+    font-size: 12px;
+    font-weight: 500;
+}
+
+
+/* =========================
+   INPUTS
+   ========================= */
+
+.tip-page .form-group > input,
+.tip-page .form-group > textarea {
+    width: 100%;
+
+    padding: 14px 15px;
+
+    background: #ffffff;
+
+    border: 1px solid #dfe3ea;
+
+    border-radius: 11px;
+
+    color: #111827;
+
+    font-family: inherit;
+    font-size: 15px;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+.tip-page .form-group > input::placeholder,
+.tip-page .form-group > textarea::placeholder {
+    color: #a6acb7;
+}
+
+.tip-page .form-group > input:focus,
+.tip-page .form-group > textarea:focus {
+    border-color: #6366f1;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(99, 102, 241, 0.10);
+}
+
+.tip-page .form-group > textarea {
+    min-height: 115px;
+
+    resize: vertical;
+
+    line-height: 1.5;
+}
+
+
+/* =========================
+   AMOUNT
+   ========================= */
+
+.amount-section {
+    padding-bottom: 5px;
+}
+
+.preset-amounts {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 9px;
+
+    margin: 4px 0 3px;
+}
+
+.preset-button {
+    min-height: 44px;
+
+    padding: 10px 8px;
+
+    background: #f8f9fc;
+
+    border: 1px solid #e2e5eb;
+
+    border-radius: 10px;
+
+    color: #374151;
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 650;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.15s ease,
+        background 0.15s ease,
+        border-color 0.15s ease,
+        color 0.15s ease;
+}
+
+.preset-button:hover {
+    background: #f1f2ff;
+
+    border-color: #b8bbf5;
+
+    transform: translateY(-1px);
+}
+
+.preset-button.active {
+    background: #eef2ff;
+
+    border-color: #6366f1;
+
+    color: #4f46e5;
+}
+
+
+/* =========================
+   AMOUNT + CURRENCY
+   ========================= */
+
+.tip-page .amount-currency-row {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr) 125px;
+
+    gap: 10px;
+}
+
+.tip-page .amount-input-wrapper,
+.tip-page .currency-wrapper {
+    min-height: 62px;
+
+    padding: 8px 13px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    background: #ffffff;
+
+    border: 1px solid #dfe3ea;
+
+    border-radius: 11px;
+
+    overflow: visible;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.tip-page .amount-input-wrapper:focus-within,
+.tip-page .currency-wrapper:focus-within {
+    border-color: #6366f1;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(99, 102, 241, 0.10);
+}
+
+.tip-page .amount-label {
+    padding: 0;
+
+    color: #9ca3af;
+
+    font-size: 11px;
+    font-weight: 600;
+
+    line-height: 1;
+}
+
+.tip-page .amount-input-wrapper input,
+.tip-page .currency-wrapper select {
+    width: 100%;
+
+    margin-top: 5px;
+    padding: 0;
+
+    background: transparent;
+
+    border: none;
+    outline: none;
+
+    color: #111827;
+
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 650;
+}
+
+.tip-page .currency-wrapper select {
+    cursor: pointer;
+}
+
+
+/* Remove number input arrows */
+
+.tip-page input[type="number"]::-webkit-inner-spin-button,
+.tip-page input[type="number"]::-webkit-outer-spin-button {
+    margin: 0;
+
+    -webkit-appearance: none;
+}
+
+.tip-page input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+
+/* =========================
+   TERMS
+   ========================= */
+
+.tip-page .terms-box {
+    margin: 0;
+    padding: 0;
+
+    display: flex;
+    align-items: flex-start;
+
+    gap: 10px;
+
+    background: transparent;
+
+    border: none;
+
+    cursor: pointer;
+}
+
+.tip-page .terms-box input {
+    width: 17px;
+    height: 17px;
+
+    flex: 0 0 auto;
+
+    margin: 2px 0 0;
+
+    accent-color: #4f46e5;
+
+    cursor: pointer;
+}
+
+.tip-page .terms-box span {
+    color: #6b7280;
+
+    font-size: 12px;
+    font-weight: 400;
+
+    line-height: 1.55;
+}
+
+
+/* =========================
+   ERROR
+   ========================= */
+
+.tip-page .payment-error {
+    margin: -4px 0 0;
+
+    padding: 12px 14px;
+
+    background: #fff1f2;
+
+    border: 1px solid #fecdd3;
+
+    border-radius: 10px;
+
+    color: #be123c;
+
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+
+/* =========================
+   SEND BUTTON
+   ========================= */
+
+.tip-page .send-tip-button {
+    width: 100%;
+
+    min-height: 52px;
+
+    margin: 0;
+    padding: 14px 20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #4f46e5,
+            #6366f1
+        );
+
+    border: none;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 8px 20px
+        rgba(79, 70, 229, 0.20);
+
+    color: #ffffff;
+
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.15s ease,
+        box-shadow 0.15s ease,
+        opacity 0.15s ease;
+}
+
+.tip-page .send-tip-button:hover {
+    opacity: 1;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 11px 24px
+        rgba(79, 70, 229, 0.27);
+}
+
+.tip-page .send-tip-button:active {
+    transform: translateY(0);
+}
+
+
+/* =========================
+   SECURE PAYMENT
+   ========================= */
+
+.secure-payment {
+    margin-top: -10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 6px;
+
+    color: #9ca3af;
+
+    font-size: 11px;
+}
+
+.secure-payment span {
+    font-size: 11px;
+}
+
+
+/* =========================
+   FOOTER
+   ========================= */
+
+.tip-footer {
+    margin-top: 22px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 8px;
+
+    color: #9ca3af;
+
+    font-size: 12px;
+}
+
+.tip-footer strong {
+    color: #6b7280;
+}
+
+
+/* =========================
+   SUCCESS SCREEN
+   ========================= */
+
+.tip-page .payment-success {
+    padding: 45px 20px;
+
+    text-align: center;
+}
+
+.tip-page .success-icon {
+    width: 72px;
+    height: 72px;
+
+    margin: 0 auto 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #ecfdf5;
+
+    border: 1px solid #a7f3d0;
+    border-radius: 50%;
+
+    color: #059669;
+
+    font-size: 34px;
+    font-weight: 700;
+}
+
+.tip-page .payment-success h2 {
+    margin: 0 0 9px;
+
+    color: #111827;
+
+    font-size: 24px;
+}
+
+.tip-page .payment-success p {
+    margin: 0 0 26px;
+
+    color: #6b7280;
+
+    line-height: 1.6;
+}
+
+
+/* =========================
+   MOBILE
+   ========================= */
+
+@media (max-width: 600px) {
+
+    .tip-page {
+        padding:
+            30px 14px
+            45px;
+    }
+
+    .tip-container {
+        max-width: 100%;
+    }
+
+    .creator-section {
+        margin-bottom: 22px;
+    }
+
+    .creator-section .profile-image,
+    .creator-section .profile-placeholder {
+        width: 80px;
+        height: 80px;
+    }
+
+    .creator-name {
+        font-size: 25px;
+    }
+
+    .tip-page .tip-card {
+        padding: 24px 18px;
+
+        border-radius: 18px;
+    }
+
+    .tip-card-header {
+        margin-bottom: 24px;
+    }
+
+    .tip-card-header h2 {
+        font-size: 21px;
+    }
+
+    .preset-amounts {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .tip-page .amount-currency-row {
+        grid-template-columns:
+            minmax(0, 1fr) 105px;
+    }
+
+    .tip-page .tip-form {
+        gap: 19px;
+    }
+
+    .tip-footer {
+        flex-direction: column;
+
+        gap: 3px;
+    }
+}
+
+/* =====================================================
+   TIP PAGE - FINAL VISUAL REFINEMENTS
+   ===================================================== */
+
+/* Reduce unnecessary vertical space */
+.tip-page {
+    padding-top: 34px;
+}
+
+
+/* Bring creator closer to card */
+.creator-section {
+    margin-bottom: 20px;
+}
+
+
+/* Slightly smaller, cleaner avatar */
+.creator-section .profile-image,
+.creator-section .profile-placeholder {
+    width: 84px;
+    height: 84px;
+
+    margin-bottom: 12px;
+
+    box-shadow:
+        0 8px 24px
+        rgba(79, 70, 229, 0.18);
+}
+
+
+/* Creator name */
+.creator-name {
+    font-size: 26px;
+    line-height: 1.2;
+}
+
+
+/* Username */
+.creator-section .streamer-username {
+    margin-top: 4px;
+    font-size: 14px;
+}
+
+
+/* Main card */
+.tip-page .tip-card {
+    padding: 30px 32px;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 18px 50px
+        rgba(15, 23, 42, 0.07);
+}
+
+
+/* Card heading */
+.tip-card-header {
+    margin-bottom: 25px;
+}
+
+.tip-card-header h2 {
+    font-size: 22px;
+}
+
+
+/* Slightly tighter form */
+.tip-page .tip-form {
+    gap: 19px;
+}
+
+
+/* Better inputs */
+.tip-page .form-group > input,
+.tip-page .form-group > textarea {
+    background: #fbfcfe;
+}
+
+.tip-page .form-group > input:hover,
+.tip-page .form-group > textarea:hover {
+    border-color: #c8cdd7;
+}
+
+
+/* Amount boxes */
+.tip-page .amount-input-wrapper,
+.tip-page .currency-wrapper {
+    background: #fbfcfe;
+}
+
+
+/* Make amount more prominent */
+.tip-page .amount-input-wrapper input {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+
+/* Message */
+.tip-page .form-group > textarea {
+    min-height: 105px;
+}
+
+
+/* Terms */
+.tip-page .terms-box {
+    padding-top: 2px;
+}
+
+.tip-page .terms-box span {
+    color: #737b89;
+}
+
+
+/* CTA */
+.tip-page .send-tip-button {
+    min-height: 50px;
+
+    border-radius: 11px;
+
+    font-size: 15px;
+
+    box-shadow:
+        0 8px 18px
+        rgba(79, 70, 229, 0.22);
+}
+
+
+/* Payment message */
+.secure-payment {
+    margin-top: -8px;
+}
+
+
+/* Footer */
+.tip-footer {
+    margin-top: 18px;
+}
+
+
+/* MOBILE */
+@media (max-width: 600px) {
+
+    .tip-page {
+    min-height: 100vh;
+    padding: 34px 20px 70px;
+
+    background-color: #f7f7fb;
+
+    background-image:
+        linear-gradient(
+            rgba(99, 102, 241, 0.035) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(99, 102, 241, 0.035) 1px,
+            transparent 1px
+        ),
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(99, 102, 241, 0.13),
+            transparent 38%
+        );
+
+    background-size:
+        32px 32px,
+        32px 32px,
+        100% 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+    .creator-section .profile-image,
+    .creator-section .profile-placeholder {
+        width: 74px;
+        height: 74px;
+    }
+
+    .creator-name {
+        font-size: 23px;
+    }
+
+    .tip-page .tip-card {
+        padding: 23px 17px;
+    }
+
+    .tip-card-header h2 {
+        font-size: 20px;
+    }
+}
+
+.creator-section {
+    position: relative;
+    z-index: 2;
+    margin-bottom: 16px;
+}
+
+.tip-page .tip-card {
+    border: 1px solid rgba(99, 102, 241, 0.10);
+
+    box-shadow:
+        0 20px 55px rgba(15, 23, 42, 0.08),
+        0 2px 8px rgba(15, 23, 42, 0.03);
+}
+
+/* =====================================================
+   TIP PAGE DESKTOP BACKGROUND - FINAL
+   ===================================================== */
+
+.tip-page {
+    min-height: 100vh;
+    padding: 34px 20px 70px;
+
+    background-color: #f7f7fb;
+
+    background-image:
+        linear-gradient(
+            rgba(99, 102, 241, 0.04) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(99, 102, 241, 0.04) 1px,
+            transparent 1px
+        ),
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(99, 102, 241, 0.16),
+            transparent 40%
+        );
+
+    background-size:
+        32px 32px,
+        32px 32px,
+        100% 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import '../styles/TipHistory.css';
 
 const API_URL =
     import.meta.env.VITE_API_URL;
@@ -150,182 +151,396 @@ useEffect(() => {
     }
 
     return (
+    <div className="history-page">
 
-        <div className="tip-history-page">
+        {/* ================= TOPBAR ================= */}
 
-            <div className="tip-history-header">
+        <header className="history-topbar">
 
-                <div>
-                    <h1>Tip History</h1>
-
-                    <div className="tip-history-filters">
-
-    <input
-        type="text"
-        placeholder="Search supporter, message or payment ID..."
-        value={search}
-        onChange={(e) =>
-            setSearch(e.target.value)
-        }
-    />
-
-    <select
-        value={currencyFilter}
-        onChange={(e) =>
-            setCurrencyFilter(e.target.value)
-        }
-    >
-        <option value="ALL">
-            All Currencies
-        </option>
-
-        <option value="INR">INR</option>
-        <option value="USD">USD</option>
-        <option value="EUR">EUR</option>
-        <option value="GBP">GBP</option>
-        <option value="CHF">CHF</option>
-        <option value="SGD">SGD</option>
-        <option value="CAD">CAD</option>
-        <option value="AUD">AUD</option>
-
-    </select>
-
-</div>
-                
-                    <p>
-                        View all your successful tips.
-                    </p>
+            <div className="history-brand">
+                <div className="history-brand-icon">
+                    T
                 </div>
 
-                <button
-                    type="button"
-                    onClick={() =>
-                        navigate("/dashboard")
-                    }
-                >
-                    Back to Dashboard
-                </button>
-
+                <span>TipWave</span>
             </div>
 
+            <button
+                type="button"
+                className="history-back-button"
+                onClick={() =>
+                    navigate("/dashboard")
+                }
+            >
+                ← Back to Dashboard
+            </button>
 
-            {tips.length === 0 ? (
+        </header>
 
-                <div className="no-tips">
-                    No tips received yet.
+
+        {/* ================= CONTENT ================= */}
+
+        <main className="history-content">
+
+            {/* PAGE HEADING */}
+
+            <section className="history-heading">
+
+                <p className="history-eyebrow">
+                    PAYMENTS
+                </p>
+
+                <h1>Tip History</h1>
+
+                <p>
+                    View and search all your successful tips.
+                </p>
+
+            </section>
+
+
+            {/* ================= MAIN CARD ================= */}
+
+            <section className="history-card">
+
+                {/* CARD HEADER */}
+
+                <div className="history-card-header">
+
+                    <div>
+
+                        <h2>
+                            All Tips
+                        </h2>
+
+                        <p>
+                            {pagination.totalTips || 0}{" "}
+                            {(pagination.totalTips || 0) === 1
+                                ? "successful tip"
+                                : "successful tips"}
+                        </p>
+
+                    </div>
+
+
+                    {/* FILTERS */}
+
+                    <div className="history-filters">
+
+                        <div className="history-search">
+
+                            <span className="history-search-icon">
+                                ⌕
+                            </span>
+
+                            <input
+                                type="text"
+                                placeholder="Search supporter, message or payment ID..."
+                                value={search}
+                                onChange={(e) =>
+                                    setSearch(
+                                        e.target.value
+                                    )
+                                }
+                            />
+
+                        </div>
+
+
+                        <select
+                            className="history-currency-filter"
+                            value={currencyFilter}
+                            onChange={(e) =>
+                                setCurrencyFilter(
+                                    e.target.value
+                                )
+                            }
+                        >
+                            <option value="ALL">
+                                All Currencies
+                            </option>
+
+                            <option value="INR">
+                                INR
+                            </option>
+
+                            <option value="USD">
+                                USD
+                            </option>
+
+                            <option value="EUR">
+                                EUR
+                            </option>
+
+                            <option value="GBP">
+                                GBP
+                            </option>
+
+                            <option value="CHF">
+                                CHF
+                            </option>
+
+                            <option value="SGD">
+                                SGD
+                            </option>
+
+                            <option value="CAD">
+                                CAD
+                            </option>
+
+                            <option value="AUD">
+                                AUD
+                            </option>
+
+                        </select>
+
+                    </div>
+
                 </div>
 
-            ) : (
 
-                <div className="tip-history-table-wrapper">
+                {/* ================= EMPTY STATE ================= */}
 
-                    <table className="tip-history-table">
-{tips.length === 0 && (
-    <p className="no-filtered-tips">
-        No matching tips found.
-    </p>
-)}
-                        <thead>
-                            <tr>
-                                <th>Date</th>
-                                <th>Supporter</th>
-                                <th>Amount</th>
-                                <th>Message</th>
-                                <th>Payment ID</th>
-                            </tr>
-                        </thead>
+                {tips.length === 0 ? (
 
-                        <tbody>
+                    <div className="history-empty">
 
-                          {tips.map((tip) => (
+                        <div className="history-empty-icon">
+                            ♡
+                        </div>
 
-                                <tr key={tip._id}>
+                        <h3>
+                            {search ||
+                            currencyFilter !== "ALL"
+                                ? "No matching tips"
+                                : "No tips yet"}
+                        </h3>
 
-                                    <td>
-                                        {new Date(
-                                            tip.createdAt
-                                        ).toLocaleString()}
-                                    </td>
+                        <p>
+                            {search ||
+                            currencyFilter !== "ALL"
+                                ? "Try changing your search or currency filter."
+                                : "Your successful tips will appear here."}
+                        </p>
 
-                                    <td>
-                                        {tip.donorName ||
-                                            "Anonymous"}
-                                    </td>
+                    </div>
 
-                                    <td>
-                                        {formatMoney(
-                                            tip.amount,
-                                            tip.currency ||
-                                                "INR"
-                                        )}
-                                    </td>
+                ) : (
 
-                                    <td>
-                                        {tip.message ||
-                                            "—"}
-                                    </td>
+                    <>
+                        {/* ================= TABLE ================= */}
 
-                                    <td>
-                                        {tip.razorpayPaymentId ||
-                                            "—"}
-                                    </td>
+                        <div className="history-table-wrapper">
 
-                                </tr>
+                            <table className="history-table">
 
-                            ))}
+                                <thead>
 
-                        </tbody>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Supporter</th>
+                                        <th>Amount</th>
+                                        <th>Message</th>
+                                        <th>Payment ID</th>
+                                    </tr>
 
-                    </table>
-{pagination.totalPages > 1 && (
+                                </thead>
 
-    <div className="tip-pagination">
 
-        <button
-            type="button"
-            disabled={
-                pagination.currentPage <= 1
-            }
-            onClick={() =>
-                setPage(
-                    pagination.currentPage - 1
-                )
-            }
-        >
-            Previous
-        </button>
+                                <tbody>
 
-        <span>
-            Page{" "}
-            {pagination.currentPage}
-            {" "}of{" "}
-            {pagination.totalPages}
-        </span>
+                                    {tips.map((tip) => (
 
-        <button
-            type="button"
-            disabled={
-                pagination.currentPage >=
-                pagination.totalPages
-            }
-            onClick={() =>
-                setPage(
-                    pagination.currentPage + 1
-                )
-            }
-        >
-            Next
-        </button>
+                                        <tr key={tip._id}>
+
+                                            {/* DATE */}
+
+                                            <td>
+
+                                                <div className="history-date">
+
+                                                    <strong>
+                                                        {new Date(
+                                                            tip.createdAt
+                                                        ).toLocaleDateString()}
+                                                    </strong>
+
+                                                    <span>
+                                                        {new Date(
+                                                            tip.createdAt
+                                                        ).toLocaleTimeString(
+                                                            [],
+                                                            {
+                                                                hour:
+                                                                    "2-digit",
+                                                                minute:
+                                                                    "2-digit"
+                                                            }
+                                                        )}
+                                                    </span>
+
+                                                </div>
+
+                                            </td>
+
+
+                                            {/* SUPPORTER */}
+
+                                            <td>
+
+                                                <div className="history-supporter">
+
+                                                    <div className="history-supporter-avatar">
+
+                                                        {(tip.donorName ||
+                                                            "A")
+                                                            .charAt(0)
+                                                            .toUpperCase()}
+
+                                                    </div>
+
+                                                    <strong>
+                                                        {tip.donorName ||
+                                                            "Anonymous"}
+                                                    </strong>
+
+                                                </div>
+
+                                            </td>
+
+
+                                            {/* AMOUNT */}
+
+                                            <td>
+
+                                                <strong className="history-amount">
+
+                                                    {formatMoney(
+                                                        tip.amount,
+                                                        tip.currency ||
+                                                            "INR"
+                                                    )}
+
+                                                </strong>
+
+                                            </td>
+
+
+                                            {/* MESSAGE */}
+
+                                            <td>
+
+                                                <span className="history-message">
+
+                                                    {tip.message ||
+                                                        "—"}
+
+                                                </span>
+
+                                            </td>
+
+
+                                            {/* PAYMENT ID */}
+
+                                            <td>
+
+                                                <span
+                                                    className="history-payment-id"
+                                                    title={
+                                                        tip.razorpayPaymentId ||
+                                                        ""
+                                                    }
+                                                >
+
+                                                    {tip.razorpayPaymentId ||
+                                                        "—"}
+
+                                                </span>
+
+                                            </td>
+
+                                        </tr>
+
+                                    ))}
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+
+                        {/* ================= PAGINATION ================= */}
+
+                        {pagination.totalPages > 1 && (
+
+                            <div className="history-pagination">
+
+                                <div className="history-page-info">
+
+                                    Page{" "}
+                                    <strong>
+                                        {pagination.currentPage}
+                                    </strong>{" "}
+                                    of{" "}
+                                    <strong>
+                                        {pagination.totalPages}
+                                    </strong>
+
+                                </div>
+
+
+                                <div className="history-page-buttons">
+
+                                    <button
+                                        type="button"
+                                        disabled={
+                                            pagination.currentPage <=
+                                            1
+                                        }
+                                        onClick={() =>
+                                            setPage(
+                                                pagination.currentPage -
+                                                    1
+                                            )
+                                        }
+                                    >
+                                        ← Previous
+                                    </button>
+
+
+                                    <button
+                                        type="button"
+                                        disabled={
+                                            pagination.currentPage >=
+                                            pagination.totalPages
+                                        }
+                                        onClick={() =>
+                                            setPage(
+                                                pagination.currentPage +
+                                                    1
+                                            )
+                                        }
+                                    >
+                                        Next →
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                        )}
+
+                    </>
+
+                )}
+
+            </section>
+
+        </main>
 
     </div>
-
-)}
-                </div>
-
-            )}
-
-        </div>
-    );
+);
 }
 
 export default TipHistory;
