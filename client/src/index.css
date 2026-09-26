@@ -1,0 +1,782 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f5f7;
+}
+
+.tip-page {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 40px 20px;
+    background: #f4f5f7;
+}
+
+.tip-card {
+    width: 100%;
+    max-width: 540px;
+    background: white;
+    padding: 32px;
+    border-radius: 18px;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
+}
+
+
+.streamer-header {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+
+.streamer-header h1 {
+    margin: 0;
+    font-size: 28px;
+}
+
+.streamer-header p {
+    color: #666;
+}
+.streamer-username {
+    margin: 6px 0;
+    color: #777;
+}
+
+.profile-image,
+.profile-placeholder {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    margin: 0 auto 14px;
+}
+
+.profile-image {
+    object-fit: cover;
+}
+
+.streamer-bio {
+    margin-top: 10px;
+    color: #555;
+}
+
+.form-group label {
+    font-weight: 600;
+}
+
+.form-group input,
+.form-group textarea {
+    padding: 13px 14px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 15px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.profile-placeholder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #111;
+    color: white;
+    font-size: 34px;
+    font-weight: 700;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+label {
+    font-weight: 600;
+    margin-top: 5px;
+}
+
+input,
+textarea {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.amount-buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+}
+
+.amount-button {
+    padding: 12px;
+    border: 1px solid #ddd;
+    background: white;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.amount-buttons button:hover {
+    background: #eeeeee;
+}
+
+.amount-button.active {
+    background: #111;
+    color: white;
+    border-color: #111;
+}
+.character-count {
+    text-align: right;
+    font-size: 13px;
+    color: #777;
+}
+.terms-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 500;
+}
+
+.terms-row input {
+    width: auto;
+}
+
+.send-tip-button {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    background: #111;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.send-tip-button:hover {
+    opacity: 0.9;
+}
+
+@media (max-width: 600px) {
+    .tip-card {
+        padding: 22px;
+    }
+
+    .amount-buttons {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+form > button {
+    margin-top: 10px;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    background: #111;
+    color: white;
+}
+
+form > button:hover {
+    opacity: 0.9;
+}
+.overlay-page {
+    min-height: 100vh;
+    background: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding: 60px;
+}
+
+.tip-alert {
+    width: 450px;
+    padding: 25px;
+    text-align: center;
+    background: rgba(20, 20, 20, 0.92);
+    color: white;
+    border-radius: 18px;
+    animation: tipPop 0.5s ease;
+}
+
+.tip-alert h2 {
+    margin-top: 0;
+}
+
+.tip-alert h1 {
+    font-size: 48px;
+    margin: 10px 0;
+}
+
+.tip-alert h3 {
+    margin: 10px 0;
+}
+
+.tip-alert p {
+    font-size: 18px;
+    overflow-wrap: anywhere;
+}
+
+@keyframes tipPop {
+    from {
+        transform: translateY(50px) scale(0.8);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+
+.dashboard {
+    max-width: 1100px;
+    margin: auto;
+    padding: 40px 20px;
+}
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.dashboard-header h1 {
+    margin-bottom: 5px;
+}
+
+.dashboard-header p {
+    color: #666;
+}
+
+.dashboard-header button {
+    padding: 10px 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns:
+        repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.stat-card {
+    background: white;
+    padding: 25px;
+    border-radius: 14px;
+    box-shadow:
+        0 5px 20px
+        rgba(0, 0, 0, 0.06);
+}
+
+.stat-card p {
+    color: #666;
+}
+
+.stat-card h2 {
+    margin-bottom: 0;
+}
+
+.dashboard-links {
+    display: grid;
+    grid-template-columns:
+        repeat(2, 1fr);
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.dashboard-links > div {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.dashboard-links a {
+    overflow-wrap: anywhere;
+}
+
+.tips-section {
+    background: white;
+    padding: 25px;
+    border-radius: 14px;
+}
+
+.tip-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 16px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.tip-row p {
+    margin-bottom: 0;
+    color: #666;
+}
+
+@media (max-width: 700px) {
+
+    .stats-grid,
+    .dashboard-links {
+        grid-template-columns: 1fr;
+    }
+}
+
+.dashboard-links span {
+    display: block;
+    margin: 10px 0;
+    overflow-wrap: anywhere;
+    color: #555;
+}
+
+.dashboard-links button {
+    padding: 10px 14px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background: #111;
+    color: white;
+}
+
+.dashboard-links button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.alert-settings-section {
+    background: white;
+    padding: 25px;
+    border-radius: 14px;
+    margin-bottom: 30px;
+}
+
+.settings-grid {
+    display: grid;
+    grid-template-columns:
+        repeat(2, 1fr);
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.settings-grid > div {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.settings-grid input[type="number"] {
+    max-width: 200px;
+}
+
+.settings-grid input[type="checkbox"] {
+    width: auto;
+    margin-right: 8px;
+}
+
+.alert-settings-section > button {
+    padding: 12px 18px;
+    background: #111;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.alert-settings-section > button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+@media (max-width: 700px) {
+
+    .settings-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.profile-settings-section {
+    background: white;
+    padding: 25px;
+    border-radius: 14px;
+    margin-bottom: 30px;
+}
+
+.profile-form {
+    display: grid;
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.profile-form > div {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.profile-form textarea {
+    min-height: 100px;
+}
+
+.dashboard-profile-image {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-top: 10px;
+}
+
+.profile-settings-section > button {
+    padding: 12px 18px;
+    border: none;
+    border-radius: 8px;
+    background: #111;
+    color: white;
+    cursor: pointer;
+}
+
+.profile-settings-section > button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.branding-settings-section {
+    background: white;
+    padding: 25px;
+    border-radius: 14px;
+    margin-bottom: 30px;
+}
+
+.branding-grid {
+    display: grid;
+    grid-template-columns:
+        repeat(2, 1fr);
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.branding-grid > div {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.branding-grid input[type="color"] {
+    width: 70px;
+    height: 45px;
+    padding: 2px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.branding-settings-section > button {
+    padding: 12px 18px;
+    border: none;
+    border-radius: 8px;
+    background: #111;
+    color: white;
+    cursor: pointer;
+}
+
+.branding-preview {
+    max-width: 500px;
+    padding: 25px;
+    border-radius: 14px;
+    margin: 25px 0;
+    border: 1px solid #ddd;
+}
+
+.branding-preview-card {
+    padding: 25px;
+    border-radius: 14px;
+    text-align: center;
+}
+
+.branding-preview-image {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.branding-preview-card h3 {
+    margin: 5px 0;
+}
+
+.branding-preview-card p {
+    margin: 6px 0;
+}
+
+.branding-preview-amounts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin: 20px 0 12px;
+}
+
+.branding-preview-amounts button {
+    padding: 10px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.branding-preview-card input,
+.branding-preview-card textarea {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.branding-preview-send {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    color: white;
+}
+
+.custom-amounts-section {
+    margin: 25px 0;
+}
+
+.custom-amounts-section h3 {
+    margin-bottom: 5px;
+}
+
+.custom-amounts-section > p {
+    color: #666;
+    margin-top: 0;
+}
+
+.custom-amounts-grid {
+    display: grid;
+    grid-template-columns:
+        repeat(4, 1fr);
+    gap: 12px;
+}
+
+.custom-amounts-grid > div {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.amount-input-wrapper {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    background: white;
+}
+
+.amount-input-wrapper span {
+    padding-left: 10px;
+    font-weight: 600;
+}
+
+.amount-input-wrapper input {
+    border: none;
+}
+
+.amount-input-wrapper input:focus {
+    outline: none;
+}
+
+@media (max-width: 700px) {
+
+    .custom-amounts-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+}
+
+.tip-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.form-group label {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.amount-currency-row {
+    display: grid;
+    grid-template-columns: 1fr 110px;
+    gap: 10px;
+}
+
+.amount-currency-row input,
+.amount-currency-row select,
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 13px 14px;
+    border: 1px solid #d7d7d7;
+    border-radius: 10px;
+    font-size: 15px;
+}
+
+.amount-currency-row select {
+    cursor: pointer;
+}
+
+.form-group textarea {
+    min-height: 110px;
+    resize: vertical;
+}
+
+.message-count {
+    text-align: right;
+    font-size: 13px;
+    color: #777;
+}
+
+.terms-box {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px;
+    border: 1px dashed #ccc;
+    border-radius: 10px;
+    font-size: 13px;
+    line-height: 1.35;
+}
+
+.terms-box input {
+    width: auto;
+    margin-top: 2px;
+}
+
+.send-tip-button {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.payment-success {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.success-icon {
+    width: 70px;
+    height: 70px;
+
+    margin: 0 auto 20px;
+
+    border-radius: 50%;
+
+    background: #16a34a;
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 38px;
+    font-weight: bold;
+}
+
+.payment-success h2 {
+    margin-bottom: 10px;
+}
+
+.payment-success p {
+    margin-bottom: 25px;
+}
+
+.recent-tips-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.recent-tips-header h2 {
+    margin: 0;
+}
+
+.view-all-tips-button {
+    padding: 9px 16px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    background: white;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.view-all-tips-button:hover {
+    background: #f3f4f6;
+}
+
+.tip-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    margin-top: 24px;
+}
+
+.tip-pagination button {
+    padding: 9px 18px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    background: white;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.tip-pagination button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.payment-error {
+    margin-bottom: 15px;
+    padding: 12px 14px;
+
+    background: #fee2e2;
+    border: 1px solid #fecaca;
+    border-radius: 8px;
+
+    color: #991b1b;
+    font-size: 14px;
+}
