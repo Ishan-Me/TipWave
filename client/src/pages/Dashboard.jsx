@@ -308,13 +308,9 @@ setAlertSettings(
         }
     };
 
-    const tipUrl =
-        `http://localhost:5173/${user?.username}`;
+    const tipUrl = `${window.location.origin}/${user?.username}`;
 
-    const overlayUrl =
-        overlayKey
-            ? `http://localhost:5173/overlay/${overlayKey}`
-            : "";
+    const overlayUrl = `${window.location.origin}/overlay/${user?.overlayKey}`;
 
     if (loading) {
         return (
